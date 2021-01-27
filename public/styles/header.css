@@ -1,5 +1,7 @@
 
-header {
+body header {
+  /* transform: translateY(120px); */
+  margin-top: 120px;
   background-color: teal;
   background-image: url("../images/foggy-birds.png");
   display: flex;

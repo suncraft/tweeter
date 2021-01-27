@@ -1,7 +1,7 @@
 
 
 $(document).ready(function() {
-  console.log("for char counter: ");
+  // console.log("for char counter: ");
 
   // $(".enteredToTweet").addEventListener("keydown", (event) => {
   //   console.log(event);
@@ -10,13 +10,16 @@ $(document).ready(function() {
   $("textarea").keyup(function() {
     let value = $(this).val().length;
     $(".counter").text(140 - value)
-    if ($(".counter").val() >= 0) {
+    let charsCounter = $(".counter").val(); //assigned AFTER change
+    if (charsCounter >= 0) {
       $(".counter").css('color', 'inherit');
     }
-    if ($(".counter").val() < 0) {
+    if (charsCounter < 0) {
       $(".counter").css('color', 'red');
     }
   })
+
+
 
   // $(".enteredToTweet").on("keydown", function(event) {
   //   console.log(this.value.length);
@@ -40,3 +43,16 @@ $(document).ready(function() {
 //     $( "p" ).text( value );
 //   })
 //   .keyup();
+
+
+// #### Working example without using charsCounter as a variable ###
+  // $("textarea").keyup(function() {
+  //   let value = $(this).val().length;
+  //   $(".counter").text(140 - value)
+  //   if ($(".counter").val() >= 0) {
+  //     $(".counter").css('color', 'inherit');
+  //   }
+  //   if ($(".counter").val() < 0) {
+  //     $(".counter").css('color', 'red');
+  //   }
+  // })
