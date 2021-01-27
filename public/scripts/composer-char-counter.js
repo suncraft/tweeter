@@ -10,9 +10,12 @@ $(document).ready(function() {
   $("textarea").keyup(function() {
     let value = $(this).val().length;
     $(".counter").text(140 - value)
-    // if (.text < 0) {
-    //   $("")
-    // }
+    if ($(".counter").val() >= 0) {
+      $(".counter").css('color', 'inherit');
+    }
+    if ($(".counter").val() < 0) {
+      $(".counter").css('color', 'red');
+    }
   })
 
   // $(".enteredToTweet").on("keydown", function(event) {
