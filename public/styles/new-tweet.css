@@ -1,0 +1,43 @@
+
+/* .new-tweet {
+
+} */
+
+form {
+  display: flex;
+  flex-direction: column;
+  /* width: 90%; */
+  margin: auto;
+}
+
+form div {
+  font-family: 'Bungee', sans-serif;
+  display: flex;
+  /* width: 100%; */
+  justify-content: space-between;
+  align-content: space-between;
+}
+
+form div button {
+  background-color: teal;
+  color: antiquewhite;
+}
+
+
+textarea {
+  background: none;
+  border: 0;
+  border-bottom: 4px solid black;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+.counter {
+  color: inherit;
+}
+
+.counter-color {
+  color: crimson;
+}

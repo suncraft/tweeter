@@ -1,0 +1,27 @@
+
+header {
+  background-color: teal;
+  background-image: url("../images/foggy-birds.png");
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  width: 100%;
+  align-items: center;
+  /* justify-content: center; */
+  /* align-content: center; */
+
+}
+/* 
+header div {
+  padding: 0%;
+} */
+
+/* header div img {
+  justify-content: center;
+  align-content: center;
+} */
+
+/* header div h2 {
+  justify-content: center;
+  align-content: center;
+} */

@@ -1,0 +1,39 @@
+
+nav {
+  /* font-family: 'Bungee', sans-serif; */
+  display: flex;
+  flex-direction: row;
+  height: 120px;
+  width: 100%;
+  background-color: #4056A1;
+  color: #ffffff;
+  padding: 1.5em;
+  align-items: center;
+  justify-content: space-between;
+  align-content: space-around;
+}
+
+nav span {
+  font-family: 'Bungee', sans-serif;
+}
+
+nav div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+nav div i {
+  color: crimson;
+  transform: translateY(-16px);
+}
+/* transforms are probably not taught so early^^ day 2 */
+
+/* nav div span p {
+  margin: 0;
+} */
+
+/* nav div {
+  align-self: 
+} */
+

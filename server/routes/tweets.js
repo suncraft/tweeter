@@ -44,3 +44,20 @@ module.exports = function(DataHelpers) {
   return tweetsRoutes;
 
 }
+
+// document.children[0].children[1].children[2].children[0].children[1].addEventListener("onchange", (event) => {
+//   console.log(event);
+// });
+// document.children[0].children[1].children[2].children[0].children[1]
+
+//working!!!################################################
+// document.addEventListener("keydown", (event) => {
+//   console.log(event);
+// });
+
+//mouseover works
+
+//the given example:
+// document.addEventListener("dblclick", (event) => {
+//   console.log(event);
+// });
