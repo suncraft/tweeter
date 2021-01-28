@@ -4,33 +4,33 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-const data = [
-    {
-      "user": {
-        "name": "Newton",
-        "avatars": "https://i.imgur.com/73hZDYK.png",
-        "handle": "@SirIsaac"
-      },
-      "content": {
-        "text": "If I have seen further it is by standing on the shoulders of giants"
-      },
-      "created_at": 1611534648221
-    },
-    {
-      "user": {
-        "name": "Descartes",
-        "avatars": "https://i.imgur.com/nlhLi3I.png",
-        "handle": "@rd"
-      },
-      "content": {
-        "text": "Je pense , donc je suis"
-      },
-      "created_at": 1611621048221
-    },
-    {"user":{"name":"Cordelia Bird","handle":"@Bird","avatars":"https://i.imgur.com/nlhLi3I.png"},"content":{"text":"This is test #1"},"created_at":1611784491891},
+// const data = [
+//     {
+//       "user": {
+//         "name": "Newton",
+//         "avatars": "https://i.imgur.com/73hZDYK.png",
+//         "handle": "@SirIsaac"
+//       },
+//       "content": {
+//         "text": "If I have seen further it is by standing on the shoulders of giants"
+//       },
+//       "created_at": 1611534648221
+//     },
+//     {
+//       "user": {
+//         "name": "Descartes",
+//         "avatars": "https://i.imgur.com/nlhLi3I.png",
+//         "handle": "@rd"
+//       },
+//       "content": {
+//         "text": "Je pense , donc je suis"
+//       },
+//       "created_at": 1611621048221
+//     },
+//     {"user":{"name":"Cordelia Bird","handle":"@Bird","avatars":"https://i.imgur.com/nlhLi3I.png"},"content":{"text":"This is test #1"},"created_at":1611784491891},
   
-    {"user":{"name":"Travis Leonard","handle":"@Leonard67","avatars":"https://i.imgur.com/2WZtOD6.png"},"content":{"text":"This is test #2#########"},"created_at":1611784531515}
-]
+//     {"user":{"name":"Travis Leonard","handle":"@Leonard67","avatars":"https://i.imgur.com/2WZtOD6.png"},"content":{"text":"This is test #2#########"},"created_at":1611784531515}
+// ]
 
 
 
@@ -40,10 +40,17 @@ $(document).ready(function() { //ENTER READY
   $(function() {
     const $button = $('form');
     $button.on('submit', function (event) {
-      console.log('Button clicked, performing ajax call: ');
       event.preventDefault();
+      // console.log(event);
+      console.log('Button clicked, performing ajax call: ');
       let formData = $(this).serialize();
-      console.log(formData);
+      if (formData.length <= 5) {
+        return alert("Enter some text!");
+      }
+      if (formData.length > 140) {
+        return alert("Too many characters!");
+      }
+      console.log(`There was: ${formData.length - 5} character(s) entered.`);
       $.ajax({
         url: '/tweets', 
         method: 'POST',
@@ -55,8 +62,36 @@ $(document).ready(function() { //ENTER READY
     });
   });
 
+const loadTweets = function() {
+  $.ajax({
+    url: `/tweets`,
+    method: `GET`,
+    dataType: `JSON`
+  })
+  .then(function (data) {
+    console.log(`LoadTweets Success: `, data);
+    renderTweets(data);
+  })
+  // $(function() {
+  //   const $button = $('#load-more-posts');
+  //   $button.on('click', function () {
+  //     console.log('Button clicked, performing ajax call...');
+  //     $.ajax('more-posts.html', { method: 'GET' })
+  //     .then(function (morePostsHtml) {
+  //       console.log('Success: ', morePostsHtml);
+  //       $button.replaceWith(morePostsHtml);
+  //     });
+  //   });
+  // });
+}
+
 const renderTweets = function(tweets) {
   // loops through tweets
+  //technically works????
+  // tweets.forEach(tweet => {
+  //   $('.tweets').append(createTweetElement(tweet));
+  // }); 
+
   for (const tweet of tweets) {
     // calls createTweetElement for each tweet
     $('.tweets').append(createTweetElement(tweet));
@@ -91,7 +126,8 @@ const createTweetElement = function(tweet) {
   return $tweet;
 }
 
-renderTweets(data);
+// console.log(typeof loadTweets());
+renderTweets(loadTweets());
 
 });
 
