@@ -1,0 +1,51 @@
+article {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0 20px 0;
+  padding: 0px 10px 15px 10px;
+  border: 3px solid #545149;
+}
+
+article:hover {
+  box-shadow: 10px 10px 3px grey;
+  /* color: white; */
+  text-shadow: 1px 1px #000000;
+}
+
+article h5 {
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  font-weight: normal;
+
+}
+
+article .tweet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+article .tweet-header img {
+  width: 50px;
+  margin-right: 10px;
+}
+
+article footer {
+  display: flex;
+  justify-content: space-between;
+  /* align-items: flex-end; */
+}
+
+article footer svg {
+  width: 20px;
+  height: 20px;
+}
+
+.faded {
+  color: rgba(182, 181, 181, 0);
+}
+
+/* .faded:hover {
+  color: rgb(139, 139, 139);
+} */
