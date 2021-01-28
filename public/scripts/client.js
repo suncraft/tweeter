@@ -33,15 +33,35 @@ const data = [
 ]
 
 
-$(document).ready(function() {
+
+$(document).ready(function() { //ENTER READY
+
+  //adjusting and testing AJAX call
+  $(function() {
+    const $button = $('form');
+    $button.on('submit', function (event) {
+      console.log('Button clicked, performing ajax call: ');
+      event.preventDefault();
+      let formData = $(this).serialize();
+      console.log(formData);
+      $.ajax({
+        url: '/tweets', 
+        method: 'POST',
+        data: formData})
+      .then(function (data) {
+        console.log('Success: ', data);
+        renderTweets(data);
+      });
+    });
+  });
 
 const renderTweets = function(tweets) {
   // loops through tweets
   for (const tweet of tweets) {
     // calls createTweetElement for each tweet
     $('.tweets').append(createTweetElement(tweet));
+    // takes return value and appends it to the tweets container
   }
-  // takes return value and appends it to the tweets container
 }
 
 const createTweetElement = function(tweet) {
