@@ -4,6 +4,14 @@ Tweeter is a simple, single-page Twitter clone.
 
 This repository is the starter code for the project: Students will fork and clone this repository, then build upon it to practice their HTML, CSS, JS, jQuery and AJAX front-end skills, and their Node, Express and MongoDB back-end skills.
 
+## Screenshots
+
+!["Screenshot of tweet compose box"](https://github.com/suncraft/tweeter/blob/master/docs/Opening-app.png)
+!["Screenshot of tweets"](https://raw.githubusercontent.com/suncraft/tweeter/master/docs/looking-at-tweets.png)
+!["Screenshot of tweets"](https://github.com/suncraft/tweeter/blob/master/docs/desktop-version.png?raw=true)
+
+
+
 ## Getting Started
 
 1. Fork this repository, then clone your fork of this repository.
