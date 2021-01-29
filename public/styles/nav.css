@@ -29,6 +29,12 @@ nav div i {
   color: crimson;
   transform: translateY(-16px);
 }
+
+nav a:link, a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
 /* transforms are probably not taught so early^^ day 2 */
 
 /* nav div span p {

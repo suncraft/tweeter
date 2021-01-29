@@ -72,20 +72,20 @@ $(document).ready(function() { //ENTER READY
       // console.log(event);
       console.log('Button clicked, performing ajax call: ');
       let formData = decodeURI($(this).serialize());
+
+      //ERROR HANDLING
       if (formData.length <= 5) {
         $('.formError').text(`Error! Enter some text`)
-        // $('.formError').css("left", "0");
         return $('.formError').css("left", "0");
       }
       if (formData.length > 145) {
         $('.formError').text(`Error! Too many characters`)
-        // $('.formError').css("left", "0");
         return $('.formError').css("left", "0");
       }
-      else {
+      
       console.log(`There was: ${formData.length - 5} character(s) entered.`);
       $('.formError').css("left", "-700px");
-      }
+      
       $.ajax({
         url: '/tweets', 
         method: 'POST',
@@ -95,27 +95,21 @@ $(document).ready(function() { //ENTER READY
         // $('.tweets').children.remove();
         // let height = $(window).scrollTop();
         // $(".tweets").children().replaceWith(loadTweets());
-        $.when( $(".tweets").children().replaceWith(loadTweets()) ).then(backToPosition(height));
-        // loadTweets();
-        // $(document).scrollTop(height);
-        // backToPosition(height);
+        $(".tweets").children().replaceWith(loadTweets())
       })
       
       .then(function() {
         setTimeout(function (){
-
-          // Something you want delayed.
-          // $(document.body).scrollTop(height);
           backToPosition(height);
         
         }, 500);
-        console.log(height);
+        // console.log(height);
+      })
+      .then(function() {
+        $('#tweet-text').val('');
       })
     });
   });
-
-  // res.setHeader("")
-  // <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src https://*; child-src 'none';"></meta>
 
 const loadTweets = function() {
   $.ajax({
@@ -127,17 +121,6 @@ const loadTweets = function() {
     console.log(`LoadTweets Success: `, data);
     renderTweets(data);
   })
-  // $(function() {
-  //   const $button = $('#load-more-posts');
-  //   $button.on('click', function () {
-  //     console.log('Button clicked, performing ajax call...');
-  //     $.ajax('more-posts.html', { method: 'GET' })
-  //     .then(function (morePostsHtml) {
-  //       console.log('Success: ', morePostsHtml);
-  //       $button.replaceWith(morePostsHtml);
-  //     });
-  //   });
-  // });
 }
 
 const renderTweets = function(tweets) {
@@ -164,8 +147,8 @@ const escape =  function(str) {
 
 const createTweetElement = function(tweet) {
   // let safeHTML = $.text($(tweet.content.text))
-  let safeHTML = $("<p>").text($(tweet.content.text));
-  console.log(safeHTML);
+  // let safeHTML = $("<p>").text($(tweet.content.text));
+  // console.log(safeHTML);
   let $tweet = `
   <article>
     <div class="tweet-header">
@@ -194,7 +177,7 @@ const createTweetElement = function(tweet) {
 
 // console.log(typeof loadTweets());
 renderTweets(loadTweets());
-backToPosition(203);
+// backToPosition(203);
 // res.setHeader("Content-Security-Policy", "script-src http://localhost:8080")
 });
 
@@ -233,3 +216,46 @@ backToPosition(203);
 // </div>
 // `;
 // document.body.innerHTML = markup;
+
+
+//content with ??? in it doesn't work
+
+// {"user":
+// {
+//   "name":"Descartes",
+//   "avatars":"https://i.imgur.com/nlhLi3I.png",
+//   "handle":"@rd"},
+//   "content":
+//   {"text":"Je pense , donc je suis"},
+//   "created_at":1611805652481,
+// }
+
+// {"user":
+// {
+//   "name":"Tillie Yamada",
+//   "handle":"@Yamada37",
+//   "avatars":"https://i.imgur.com/3GvwNBf.png"},
+//   "content":
+//   {"text":"okay"},
+//   "created_at":1611892586411
+// }
+
+// {"user":
+// {
+//   "name":"Lou Kelly",
+//   "handle":"@MissKelly",
+//   "avatars":"https://i.imgur.com/v0JXau2.png"
+// },
+// "content":
+//   {"text":"???"},
+//   "created_at":1611892059385},
+
+// {"user":
+// {
+//   "name":"Mitchell Maggini",
+//   "handle":"@DrMaggini",
+//   "avatars":"https://i.imgur.com/ilT4JDe.png"},
+// "content":
+//   {"text":"s"},
+//   "created_at":1611892064810
+// }
