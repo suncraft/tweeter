@@ -4,72 +4,33 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-// const data = [
-//     {
-//       "user": {
-//         "name": "Newton",
-//         "avatars": "https://i.imgur.com/73hZDYK.png",
-//         "handle": "@SirIsaac"
-//       },
-//       "content": {
-//         "text": "If I have seen further it is by standing on the shoulders of giants"
-//       },
-//       "created_at": 1611534648221
-//     },
-//     {
-//       "user": {
-//         "name": "Descartes",
-//         "avatars": "https://i.imgur.com/nlhLi3I.png",
-//         "handle": "@rd"
-//       },
-//       "content": {
-//         "text": "Je pense , donc je suis"
-//       },
-//       "created_at": 1611621048221
-//     },
-//     {"user":{"name":"Cordelia Bird","handle":"@Bird","avatars":"https://i.imgur.com/nlhLi3I.png"},"content":{"text":"This is test #1"},"created_at":1611784491891},
-  
-//     {"user":{"name":"Travis Leonard","handle":"@Leonard67","avatars":"https://i.imgur.com/2WZtOD6.png"},"content":{"text":"This is test #2#########"},"created_at":1611784531515}
-// ]
 
-// $(window).scroll(function() {
-//   let height = $(window).scrollTop();
-// });
-
-// $(document).ready(function(){
-//   $("button").click(function(){
-//     $(document).scrollTop(100);
-//   });
-// });
-
-// <script>alert("Uh Oh!");</script>
-
-//not working... ##############
-// $.when( $(".tweets").children().replaceWith(loadTweets()) ).then(backToPosition(height));
+ //tries to get you back to where you were
+ //after submitting a tweet
 const backToPosition = function(position) {
   console.log(`This is the position: ${position}`);
-  // $(document.body).scrollTop(position);
     window.scrollTo(0, position);
 };
 
-// setTimeout(function (){
 
-//   // Something you want delayed.
+const focusTextarea = function() {
+  $('#tweet-text').focus();
+}
 
-// }, 1000);
+// $( "#tweet-text" ).click(function() {
+//   backToPosition(0)
+//   focusTextarea()
+// });
 
-// ################
+//main callback listener:
+$(document).ready(function() {
 
-$(document).ready(function() { //ENTER READY
-
-  //adjusting and testing AJAX call
+  //form listener
   $(function() {
     const $button = $('form');
-    
     $button.on('submit', function (event) {
       event.preventDefault();
       let height = $(window).scrollTop();
-      // console.log(event);
       console.log('Button clicked, performing ajax call: ');
       let formData = decodeURI($(this).serialize());
 
@@ -83,34 +44,34 @@ $(document).ready(function() { //ENTER READY
         return $('.formError').css("left", "2rem");
       }
       
+      //success continues original functions
       console.log(`There was: ${formData.length - 5} character(s) entered.`);
       $('.formError').css("left", "-700px");
       
+      //call to input to server
       $.ajax({
         url: '/tweets', 
         method: 'POST',
         data: formData})
+      //reload all tweets with new tweet
       .then(function (data) {
         console.log('Success: ', data);
-        // $('.tweets').children.remove();
-        // let height = $(window).scrollTop();
-        // $(".tweets").children().replaceWith(loadTweets());
         $(".tweets").children().replaceWith(loadTweets())
       })
-      
+      //scoll back to position after arbitrary delay
       .then(function() {
         setTimeout(function (){
           backToPosition(height);
-        
         }, 500);
-        // console.log(height);
       })
+      //reset textarea
       .then(function() {
         $('#tweet-text').val('');
       })
     });
   });
 
+//original loadtweet call
 const loadTweets = function() {
   $.ajax({
     url: `/tweets`,
@@ -123,32 +84,22 @@ const loadTweets = function() {
   })
 }
 
+// loops through tweets from server
 const renderTweets = function(tweets) {
-  // loops through tweets
-  //technically works????
-  // tweets.forEach(tweet => {
-  //   $('.tweets').append(createTweetElement(tweet));
-  // }); 
-
   for (const tweet of tweets) {
-    // calls createTweetElement for each tweet
     $('.tweets').append(createTweetElement(tweet));
-    // takes return value and appends it to the tweets container
   }
 }
 
-// $text(tweet.content.text)
-
+// make cross site attacks unlikely
 const escape =  function(str) {
   let paragraph = document.createElement('p');
   paragraph.appendChild(document.createTextNode(str));
   return paragraph.innerHTML;
 }
 
+//tweet template
 const createTweetElement = function(tweet) {
-  // let safeHTML = $.text($(tweet.content.text))
-  // let safeHTML = $("<p>").text($(tweet.content.text));
-  // console.log(safeHTML);
   let $tweet = `
   <article>
     <div class="tweet-header">
@@ -175,87 +126,16 @@ const createTweetElement = function(tweet) {
   return $tweet;
 }
 
-// console.log(typeof loadTweets());
+//on page load: 
 renderTweets(loadTweets());
-// backToPosition(203);
-// res.setHeader("Content-Security-Policy", "script-src http://localhost:8080")
+focusTextarea();
+
+
 });
 
 
-// const beer = {
-//   name: 'Belgian Wit',
-//   brewery: `Steam Whistle Brewery`,
-//   keywords: ['pale', 'cloudy', 'spiced', 'crisp']
-// };
-// const markup = `
-// <div class="beer">
-//   <h2>${beer.name}</h2>
-//   <p class="brewery">${beer.brewery}
-// </div>
-// `;
-// document.body.innerHTML = markup;
 
-// const beer = {
-//   name: 'Belgian Wit',
-//   brewery: `Steam Whistle Brewery`,
-//   keywords: ['pale', 'cloudy', 'spiced', 'crisp']
-// };
-// function renderKeywords(keywords) {
-//   return `
-  
-//       ${keywords.map(keyword => `* ${keyword}
-// `)}
-  
-//   `;
-// }
-// const markup = `
-// <div class="beer">
-//   <h2>${beer.name}</h2>
-//   <p class="brewery">${beer.brewery}
-//   ${renderKeywords(beer.keywords).join('')}
-// </div>
-// `;
-// document.body.innerHTML = markup;
-
-
-//content with ??? in it doesn't work
-
-// {"user":
-// {
-//   "name":"Descartes",
-//   "avatars":"https://i.imgur.com/nlhLi3I.png",
-//   "handle":"@rd"},
-//   "content":
-//   {"text":"Je pense , donc je suis"},
-//   "created_at":1611805652481,
-// }
-
-// {"user":
-// {
-//   "name":"Tillie Yamada",
-//   "handle":"@Yamada37",
-//   "avatars":"https://i.imgur.com/3GvwNBf.png"},
-//   "content":
-//   {"text":"okay"},
-//   "created_at":1611892586411
-// }
-
-// {"user":
-// {
-//   "name":"Lou Kelly",
-//   "handle":"@MissKelly",
-//   "avatars":"https://i.imgur.com/v0JXau2.png"
-// },
-// "content":
-//   {"text":"???"},
-//   "created_at":1611892059385},
-
-// {"user":
-// {
-//   "name":"Mitchell Maggini",
-//   "handle":"@DrMaggini",
-//   "avatars":"https://i.imgur.com/ilT4JDe.png"},
-// "content":
-//   {"text":"s"},
-//   "created_at":1611892064810
-// }
+$( "#tweet-text" ).click(function() {
+  backToPosition(0)
+  focusTextarea()
+});

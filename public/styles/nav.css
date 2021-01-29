@@ -1,6 +1,5 @@
 
 nav {
-  /* font-family: 'Bungee', sans-serif; */
   position: fixed;
   top: 0;
   display: flex;
@@ -34,14 +33,3 @@ nav a:link, a:visited {
   text-decoration: none;
   color: inherit;
 }
-
-/* transforms are probably not taught so early^^ day 2 */
-
-/* nav div span p {
-  margin: 0;
-} */
-
-/* nav div {
-  align-self: 
-} */
-

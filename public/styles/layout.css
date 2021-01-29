@@ -26,12 +26,8 @@ body {
  */
 
 main {
-  /* justify-self: center; */
   margin: auto;
-  /* align-self: center; */
   width: 90%;
-  /* transform: translateY(120px); */
-  /* margin-top: 120px; */
 }
 
 
@@ -41,10 +37,6 @@ main {
   }
 }
 
-@media only screen and (min-width: 769px) and (max-width: 1023px) {
-  /* defaults */
-}
-
 @media only screen and (min-width: 1024px) {
   body {
     display: flex;
@@ -52,13 +44,11 @@ main {
   }
 
   main {
-    /* position: fixed; */
     margin: 140px 2em 0 0;
     width: auto;
   }
 
   header {
-    /* height: 25%; */
     width: 33%;
     margin: 160px 5% 5% 5%;
     border-radius: 17px;
@@ -74,13 +64,16 @@ main {
 }
 
 @media only screen and (min-width: 1500px) {
-  nav {
+  /* nav {
     justify-content: space-around;
+  } */
+
+  nav span {
+    margin-left: 5%;
   }
+  
+  nav div {
+    margin-right: 5%;
+  }
+
 }
-
-
-/* maybe 2k+4k screens */
-/* @media only screen and (min-width: 1920px) {
-
-} */
