@@ -26,11 +26,12 @@ form div button {
   /* display: inline; */
   position: absolute;
   color: crimson;
-  margin-left: 11rem;
+  margin-left: 2rem;
   left: -400px;
   transition: var(--transition-speed);
   /* justify-self: center; */
   /* top: -10px; */
+  font-family: 'Bungee', sans-serif;
 }
 
 textarea {

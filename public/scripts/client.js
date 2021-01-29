@@ -76,11 +76,11 @@ $(document).ready(function() { //ENTER READY
       //ERROR HANDLING
       if (formData.length <= 5) {
         $('.formError').text(`Error! Enter some text`)
-        return $('.formError').css("left", "0");
+        return $('.formError').css("left", "2rem");
       }
       if (formData.length > 145) {
         $('.formError').text(`Error! Too many characters`)
-        return $('.formError').css("left", "0");
+        return $('.formError').css("left", "2rem");
       }
       
       console.log(`There was: ${formData.length - 5} character(s) entered.`);
