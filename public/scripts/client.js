@@ -36,11 +36,11 @@ $(document).ready(function() {
 
       //ERROR HANDLING
       if (formData.length <= 5) {
-        $('.formError').text(`Error! Enter some text`)
+        $('.formError').text(`Error! Enter some text`);
         return $('.formError').css("left", "2rem");
       }
       if (formData.length > 145) {
-        $('.formError').text(`Error! Too many characters`)
+        $('.formError').text(`Error! Too many characters`);
         return $('.formError').css("left", "2rem");
       }
       
@@ -56,7 +56,7 @@ $(document).ready(function() {
       //reload all tweets with new tweet
       .then(function (data) {
         console.log('Success: ', data);
-        $(".tweets").children().replaceWith(loadTweets())
+        $(".tweets").children().replaceWith(loadTweets());
       })
       //scoll back to position after arbitrary delay
       .then(function() {
@@ -67,7 +67,7 @@ $(document).ready(function() {
       //reset textarea
       .then(function() {
         $('#tweet-text').val('');
-      })
+      });
     });
   });
 
@@ -81,22 +81,22 @@ const loadTweets = function() {
   .then(function (data) {
     console.log(`LoadTweets Success: `, data);
     renderTweets(data);
-  })
-}
+  });
+};
 
 // loops through tweets from server
 const renderTweets = function(tweets) {
   for (const tweet of tweets) {
     $('.tweets').append(createTweetElement(tweet));
   }
-}
+};
 
 // make cross site attacks unlikely
 const escape =  function(str) {
   let paragraph = document.createElement('p');
   paragraph.appendChild(document.createTextNode(str));
   return paragraph.innerHTML;
-}
+};
 
 //tweet template
 const createTweetElement = function(tweet) {
@@ -129,13 +129,11 @@ const createTweetElement = function(tweet) {
 //on page load: 
 renderTweets(loadTweets());
 focusTextarea();
-
-
 });
 
 
 
 $( "#tweet-text" ).click(function() {
-  backToPosition(0)
-  focusTextarea()
+  backToPosition(0);
+  focusTextarea();
 });
