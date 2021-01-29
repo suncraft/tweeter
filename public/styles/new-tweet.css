@@ -1,3 +1,7 @@
+:root {
+  --transition-speed: 600ms;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -16,6 +20,17 @@ form div {
 form div button {
   background-color: teal;
   color: antiquewhite;
+}
+
+.formError {
+  /* display: inline; */
+  position: absolute;
+  color: crimson;
+  margin-left: 11rem;
+  left: -400px;
+  transition: var(--transition-speed);
+  /* justify-self: center; */
+  /* top: -10px; */
 }
 
 textarea {

@@ -32,35 +32,90 @@
 //     {"user":{"name":"Travis Leonard","handle":"@Leonard67","avatars":"https://i.imgur.com/2WZtOD6.png"},"content":{"text":"This is test #2#########"},"created_at":1611784531515}
 // ]
 
+// $(window).scroll(function() {
+//   let height = $(window).scrollTop();
+// });
 
+// $(document).ready(function(){
+//   $("button").click(function(){
+//     $(document).scrollTop(100);
+//   });
+// });
+
+// <script>alert("Uh Oh!");</script>
+
+//not working... ##############
+// $.when( $(".tweets").children().replaceWith(loadTweets()) ).then(backToPosition(height));
+const backToPosition = function(position) {
+  console.log(`This is the position: ${position}`);
+  // $(document.body).scrollTop(position);
+    window.scrollTo(0, position);
+};
+
+// setTimeout(function (){
+
+//   // Something you want delayed.
+
+// }, 1000);
+
+// ################
 
 $(document).ready(function() { //ENTER READY
 
   //adjusting and testing AJAX call
   $(function() {
     const $button = $('form');
+    
     $button.on('submit', function (event) {
       event.preventDefault();
+      let height = $(window).scrollTop();
       // console.log(event);
       console.log('Button clicked, performing ajax call: ');
-      let formData = $(this).serialize();
+      let formData = decodeURI($(this).serialize());
       if (formData.length <= 5) {
-        return alert("Enter some text!");
+        $('.formError').text(`Error! Enter some text`)
+        // $('.formError').css("left", "0");
+        return $('.formError').css("left", "0");
       }
-      if (formData.length > 140) {
-        return alert("Too many characters!");
+      if (formData.length > 145) {
+        $('.formError').text(`Error! Too many characters`)
+        // $('.formError').css("left", "0");
+        return $('.formError').css("left", "0");
       }
+      else {
       console.log(`There was: ${formData.length - 5} character(s) entered.`);
+      $('.formError').css("left", "-700px");
+      }
       $.ajax({
         url: '/tweets', 
         method: 'POST',
         data: formData})
       .then(function (data) {
         console.log('Success: ', data);
-        renderTweets(data);
-      });
+        // $('.tweets').children.remove();
+        // let height = $(window).scrollTop();
+        // $(".tweets").children().replaceWith(loadTweets());
+        $.when( $(".tweets").children().replaceWith(loadTweets()) ).then(backToPosition(height));
+        // loadTweets();
+        // $(document).scrollTop(height);
+        // backToPosition(height);
+      })
+      
+      .then(function() {
+        setTimeout(function (){
+
+          // Something you want delayed.
+          // $(document.body).scrollTop(height);
+          backToPosition(height);
+        
+        }, 500);
+        console.log(height);
+      })
     });
   });
+
+  // res.setHeader("")
+  // <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src https://*; child-src 'none';"></meta>
 
 const loadTweets = function() {
   $.ajax({
@@ -99,14 +154,25 @@ const renderTweets = function(tweets) {
   }
 }
 
+// $text(tweet.content.text)
+
+const escape =  function(str) {
+  let paragraph = document.createElement('p');
+  paragraph.appendChild(document.createTextNode(str));
+  return paragraph.innerHTML;
+}
+
 const createTweetElement = function(tweet) {
+  // let safeHTML = $.text($(tweet.content.text))
+  let safeHTML = $("<p>").text($(tweet.content.text));
+  console.log(safeHTML);
   let $tweet = `
   <article>
     <div class="tweet-header">
       <h5><img src="${tweet.user.avatars}">${tweet.user.name}</h5>
       <span class="faded">${tweet.user.handle}</span>
     </div>
-      <p>${tweet.content.text}</p>
+      <p>${escape(tweet.content.text)}</p>
     <footer>
       <span class="tweetDate">${Math.floor(((Date.now() - tweet.created_at) / 1000 / 60 / 60) / 24)} days ago</span>
       <span class="tweetIcons">
@@ -128,7 +194,8 @@ const createTweetElement = function(tweet) {
 
 // console.log(typeof loadTweets());
 renderTweets(loadTweets());
-
+backToPosition(203);
+// res.setHeader("Content-Security-Policy", "script-src http://localhost:8080")
 });
 
 
